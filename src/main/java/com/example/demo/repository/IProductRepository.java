@@ -11,4 +11,6 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     Iterable<Product> findAllByCategoryName(String name);
 
     Iterable<Product> findAllByPriceBetween(int from, int to);
+
+    Iterable<Product> findAllByNameContaining(String name);
 }

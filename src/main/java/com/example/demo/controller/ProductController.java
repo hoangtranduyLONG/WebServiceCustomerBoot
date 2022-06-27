@@ -62,10 +62,9 @@ public class ProductController {
 
     @GetMapping("/find-by-name/{name}")
     public ResponseEntity<Iterable<Product>> showViewById(@PathVariable String name) {
-        Iterable<Product> product = productService.findAllByCategoryName(name);
+        Iterable<Product> product = productService.findNameContai(name);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
-
     @GetMapping("/find-by-price")
     public ResponseEntity<Iterable<Product>> showViewById(@RequestParam int from, @RequestParam int to) {
         Iterable<Product> product = productService.findAllByPriceBetween(from, to);
