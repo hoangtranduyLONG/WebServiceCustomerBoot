@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -62,7 +63,7 @@ public class ProductController {
 
     @GetMapping("/find-by-name/{name}")
     public ResponseEntity<Iterable<Product>> showViewById(@PathVariable String name) {
-        Iterable<Product> product = productService.findNameContai(name);
+        Iterable<Product> product = productService.findNameContain(name);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
     @GetMapping("/find-by-price")
@@ -79,4 +80,5 @@ public class ProductController {
         productService.remove(id);
         return new ResponseEntity<>(productOptional.get(), HttpStatus.NO_CONTENT);
     }
-}
+
+    }

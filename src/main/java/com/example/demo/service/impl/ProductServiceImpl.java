@@ -48,7 +48,7 @@ public class ProductServiceImpl implements IProductService {
         return productRepository.findAllByPriceBetween(from, to);
     }
 
-    public Iterable<Product> findNameContai(String name) {
+    public Iterable<Product> findNameContain(String name) {
         return productRepository.findAllByNameContaining(name);
     }
 }
