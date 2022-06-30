@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+            crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#" onclick="showAddForm()">Add</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">List Home</div>
+        <div class="col-9">
+            <h3>List Home</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Bedroom</th>
+                    <th scope="col">Bathroom</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody id="list">
+                </tbody>
+            </table>
+            <div id="pageable"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Room</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addForm" enctype="multipart/form-data" >
+                    <label>Name: </label>
+                    <input type="text" name="name" class="form-control">
+                    <label>Address: </label>
+                    <input type="text" name="address" class="form-control">
+                    <label>Bedroom Quantity: </label>
+                    <input type="number" name="bedroom" class="form-control">
+                    <label>Bathroom Quantity: </label>
+                    <input type="text" name="bathroom" class="form-control">
+                    <label>Image: </label>
+                    <input type="file" name="file" class="form-control">
+                    <label>Price: </label>
+                    <input type="number" name="price" class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="save()" >Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Edit Home</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" enctype="multipart/form-data">
+                    <input type="hidden" id="id">
+                    <label>Name: </label>
+                    <input type="text" name="name" id="name" class="form-control">
+                    <label>Address: </label>
+                    <input type="text" name="address" id="address" class="form-control">
+                    <label>Bedroom Quantity: </label>
+                    <input type="number" name="bedroom" id="bedroom" class="form-control">
+                    <label>Bathroom Quantity: </label>
+                    <input type="text" name="bathroom" id="bathroom" class="form-control">
+                    <label>Image: </label>
+                    <div id="oldFile"></div>
+                    <input type="file" name="fileEdit"  class="form-control">
+                    <label>Price: </label>
+                    <input type="number" name="price" id="price" class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="update()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let pageable = document.getElementById('pageable');
+    let tbody = document.getElementById('list');
+    let addForm = document.getElementById('addForm')
+    let editForm = document.getElementById('editForm')
+    loadData(0)
+    function loadData(number) {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/home?page=" + number,
+            success: function (list) {
+                console.log(list)
+                let str = "";
+                loadTableStudent(list.t.content)
+                let number1 = list.t.pageable.pageNumber;
+                if (list.t.pageable.pageNumber > 0 && list.t.pageable.pageNumber+1 === list.t.totalPages) {
+                    str += `<button onclick="loadData(${number1 - 1})">Previous</button> `;
+                }
+                str += list.t.pageable.pageNumber+1 + "/" + list.t.totalPages
+                if (list.t.pageable.pageNumber <= 0 && list.t.pageable.pageNumber+1 !== list.t.totalPages) {
+                    str += ` <button onclick="loadData(${number1 + 1})">Next</button>`;
+                }
+                pageable.innerHTML = str
+            }, error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+
+    function loadTableStudent(list) {
+        let str = "";
+        for (let i = 0; i < list.length; i++) {
+            str += `<tr>
+                    <th scope="row">${i+1}</th>
+                    <td>${list[i].name}</td>
+                    <td>${list[i].address}</td>
+                    <td>${list[i].bedroom}</td>
+                    <td>${list[i].bathroom}</td>
+                    <td><img src="image/${list[i].image}" style="border-radius: 8px; width: 80px; height: 80px"></td>
+                    <td>${list[i].price}</td>
+                    <td><button class="btn btn-primary" onclick="showEditForm(${list[i].id})">Edit</button></td>
+                </tr>`
+        }
+        tbody.innerHTML = str;
+    }
+
+    function showAddForm() {
+        $('#exampleModal').modal('show');
+    }
+
+    function save() {
+        let formData = new FormData(addForm);
+        $.ajax({
+            enctype: "multipart/form-data",
+            type: "POST",
+            url: "http://localhost:8080/home",
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 1000000,
+            success: function () {
+                loadData(0)
+                $('#exampleModal').modal('hide');
+                addForm.reset();
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+
+    function showEditForm(id) {
+        $('#exampleModal1').modal('show')
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/home/" + id,
+            success: function (data) {
+                console.log(data)
+                document.getElementById('id').value = data.id;
+                document.getElementById('name').value = data.name;
+                document.getElementById('address').value = data.address;
+                document.getElementById('bedroom').value = data.bedroom;
+                document.getElementById('bathroom').value = data.bathroom;
+                document.getElementById("oldFile").innerHTML = `<img src="image/${data.image}" style="max-width: 150px;
+                                                                           height: 150px">`;
+                document.getElementById('price').value = data.price;
+            }, error: function (error) {
+                console.log(error)
+            }
+        })
+
+    }
+
+    function update() {
+        let id = document.getElementById('id').value;
+        let formData = new FormData(editForm);
+        $.ajax({
+            type:"PUT",
+            enctype: "multipart/form-data",
+            url: "http://localhost:8080/home/" +id,
+            data : formData,
+            processData : false,
+            contentType : false,
+            cache : false,
+            success: function () {
+                loadData(0)
+                $('#exampleModal1').modal('hide');
+                editForm.reset();
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        })
+    }
+</script>
+</body>
+</html>
