@@ -26,7 +26,6 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5
 	implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.14.RELEASE'
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
-
 }
 
 tasks.named('test') {
