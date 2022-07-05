@@ -154,7 +154,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times</span>
                 </button>
-            </div>
+      sava      </div>
             <div class="modal-body">
                 <form id="register">
                     <label> Username </label>
@@ -232,10 +232,10 @@
                                 <td>${data[i].numberOfBedroom}</td>
                                 <td>${data[i].numberOfBathroom}</td>
                                 <td>${data[i].pricePerDay}</td>
-                                <td><img src = "photos/${data[i].image}" width="100px"></td>
+                                <td><img src = "image/${data[i].image}" width="100px"></td>
                                 <td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" onclick="showEditForm(${data[i].id})">Edit</button></td>
                                 <td><button class="btn btn-primary" onclick="showDeleteForm(${data[i].id})">Delete</button></td>
-                            </tr>`
+                           </tr>`
         }
         tbody.innerHTML = str;
     }
@@ -279,9 +279,9 @@
     }
 
     function saveUser() {
-        let username = document.getElementById('user name').value;
+        let username = document.getElementById('username').value;
         let password = document.getElementById('password').value;
-        let confirmPassword = document.getElementById('confirm Password').value;
+        let confirmPassword = document.getElementById('confirmPassword').value;
         let data = {
             username: username,
             password: password,
@@ -393,7 +393,7 @@
         })
     }
 
-    //hàm sửa :  sửa cả ảnh
+
     function update() {
         let id = document.getElementById('id').value;
         let formData = new FormData(editForm);
